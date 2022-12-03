@@ -5,7 +5,6 @@ Created on Sat Dec  3 12:47:22 2022
 @author: lenka
 """
 
-
 import pandas as pd
 import json
 import os
@@ -43,7 +42,7 @@ for i in range(0, 100000):
 
 # prepare control variables
 i = 0
-file_in = open('bandwidth.json')
+file_in = open('http_status.json')
 # start reading big json
 while True:
     # iterator: helps to name the files
@@ -52,7 +51,8 @@ while True:
     # get first character into buffer
     char = file_in.read(1)
     # create smaller file
-    file_out = open('out' + i + '.json', 'w')
+    file_out = open('data/out' + str(i) + '.json', 'w')
+    print('Creating: data/out' + str(i) + '.json')
     while True:
         file_out.write(char)
         if char == ']':
@@ -62,8 +62,10 @@ while True:
             break
         else:
             primed = False
+        char = file_in.read(1)
     # close the created file
     file_out.close()
+    print('Finished: ', i)
     # end of file is reached
     if char is None:
         break
