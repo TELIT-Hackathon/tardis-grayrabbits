@@ -9,6 +9,7 @@ class Preprocessor(object):
         self.dataframe = dataset
 
     # Removes data that should not affect the results of learning
+    # To keep: [everything but instance, platform, route, maybe app]
     def remove_columns(self, col_names):
         for name in col_names:
             self.dataframe.drop(name, axis=1)
