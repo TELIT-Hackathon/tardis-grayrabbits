@@ -42,7 +42,7 @@ for i in range(0, 100000):
 
 # prepare control variables
 i = 0
-file_in = open('http_status.json')
+file_in = open('latency_count.json')
 # start reading big json
 while True:
     # iterator: helps to name the files
@@ -51,7 +51,7 @@ while True:
     # get first character into buffer
     char = file_in.read(1)
     # create smaller file
-    file_out = open('data/out' + str(i) + '.json', 'w')
+    file_out = open('data_lat_count/out' + str(i) + '.json', 'w')
     print('Creating: data/out' + str(i) + '.json')
     while True:
         file_out.write(char)
@@ -67,6 +67,6 @@ while True:
     file_out.close()
     print('Finished: ', i)
     # end of file is reached
-    if char is None:
+    if char is None or i >= 5000:
         break
 file_in.close()

@@ -1,13 +1,14 @@
 import json
 import chardet
+import pandas as pd
+
 """
 f =  open('data/http_status.json', 'rb', encoding='ascii')
     enc = chardet.detect(f.read())  # or readline if the file is large
     print(enc)
 """
-
 """
-f =  open('data/http_status.json', 'r', encoding='ascii')
+f = open('data/http_status.json', 'r', encoding='ascii')
 
 data = json.load(f)
 
@@ -18,14 +19,11 @@ for i in data['emp_details']:
 
 # Closing file
 f.close()
-
 """
 
-"""
-inputFile =  open('data/http_status.json', 'r', encoding='ascii', buffering=100000000)
+inputFile = open('http_status.json', 'r', encoding='ascii', buffering=100000000)
 
-
-outputFile = open("data/http_statusFixed.json", "ab", buffering=100000000)
+outputFile = open("http_statusFixed.json", "ab", buffering=100000000)
 outputFile.write("{\n\"samples\":\n[".encode('ascii'))
 endSample = False
 for line in inputFile:
@@ -35,23 +33,15 @@ for line in inputFile:
 
     outputFile.write(line.encode('ascii'))
     length = len(line)
-    if (line[length -1 - 1] == '}'):
+    if line[length - 1 - 1] == '}':
         endSample = True
         
 outputFile.write("\n}\n]\n}\n".encode('ascii'))
 
 outputFile.close()
 
-inputFile.close();
+inputFile.close()
 
-
-"""
-
-
-f =  open('data/http_statusFixed.json', 'r', encoding='ascii')
+f = open('http_statusFixed.json', 'r', encoding='ascii')
 
 data = json.load(f)
-
-print(data["samples"][0]["metric"]["instance"])
-
-    
